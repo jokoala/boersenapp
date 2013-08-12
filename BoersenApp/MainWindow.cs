@@ -24,12 +24,16 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnComboboxentry1Changed (object sender, EventArgs e)
 	{
-		notify(String.Format ("Entry changed to: {0}", comboboxentry1.Active));
+		notify(String.Format ("Entry changed to: {0}", std_wertpapier.Active));
 	}	
 
 	protected void OnQuitActionActivated (object sender, EventArgs e)
 	{
 		Application.Quit ();
-	}
+	}	
 
+	protected void OnStdTypChanged (object sender, EventArgs e)
+	{
+		typ.Page = std_typ.Active;
+	}
 }
