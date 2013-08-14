@@ -177,7 +177,6 @@
                         <property name="Items" translatable="yes">Discountzertifikat
 Expresszertifikat</property>
                         <property name="Active">0</property>
-                        <signal name="Changed" handler="OnStdTypChanged" />
                       </widget>
                       <packing>
                         <property name="TopAttach">3</property>
@@ -201,7 +200,6 @@ Expresszertifikat</property>
                         <property name="IsTextCombo">True</property>
                         <property name="Items" translatable="yes">Goldman Sachs Wertpapier GmbH DISC.Z 15.09.14 DAX 8000</property>
                         <property name="Active">0</property>
-                        <signal name="Changed" handler="OnComboboxentry1Changed" />
                       </widget>
                       <packing>
                         <property name="LeftAttach">1</property>
@@ -455,26 +453,7 @@ Expresszertifikat</property>
                         <property name="RowSpacing">6</property>
                         <property name="ColumnSpacing">6</property>
                         <child>
-                          <widget class="Gtk.Calendar" id="calendar2">
-                            <property name="MemberName" />
-                            <property name="CanFocus">True</property>
-                            <property name="DisplayOptions">35</property>
-                          </widget>
-                          <packing>
-                            <property name="TopAttach">2</property>
-                            <property name="BottomAttach">3</property>
-                            <property name="LeftAttach">1</property>
-                            <property name="RightAttach">2</property>
-                            <property name="AutoSize">True</property>
-                            <property name="XOptions">Fill</property>
-                            <property name="YOptions">Fill</property>
-                            <property name="XExpand">False</property>
-                            <property name="XFill">True</property>
-                            <property name="XShrink">False</property>
-                            <property name="YExpand">False</property>
-                            <property name="YFill">True</property>
-                            <property name="YShrink">False</property>
-                          </packing>
+                          <placeholder />
                         </child>
                         <child>
                           <widget class="Gtk.Entry" id="entry6">
@@ -487,9 +466,8 @@ Expresszertifikat</property>
                             <property name="LeftAttach">1</property>
                             <property name="RightAttach">2</property>
                             <property name="AutoSize">True</property>
-                            <property name="XOptions">Fill</property>
                             <property name="YOptions">Fill</property>
-                            <property name="XExpand">False</property>
+                            <property name="XExpand">True</property>
                             <property name="XFill">True</property>
                             <property name="XShrink">False</property>
                             <property name="YExpand">False</property>
@@ -510,9 +488,8 @@ Expresszertifikat</property>
                             <property name="LeftAttach">1</property>
                             <property name="RightAttach">2</property>
                             <property name="AutoSize">True</property>
-                            <property name="XOptions">Fill</property>
                             <property name="YOptions">Fill</property>
-                            <property name="XExpand">False</property>
+                            <property name="XExpand">True</property>
                             <property name="XFill">True</property>
                             <property name="XShrink">False</property>
                             <property name="YExpand">False</property>
@@ -731,6 +708,7 @@ Expresszertifikat</property>
                         <property name="Text" translatable="yes">8.426,82</property>
                         <property name="IsEditable">True</property>
                         <property name="InvisibleChar">●</property>
+                        <signal name="Changed" handler="OnSzenarioEndChanged" />
                       </widget>
                       <packing>
                         <property name="TopAttach">2</property>
@@ -759,6 +737,7 @@ Expresszertifikat</property>
                         <property name="DrawValue">False</property>
                         <property name="Digits">0</property>
                         <property name="ValuePos">Top</property>
+                        <signal name="ChangeValue" handler="OnSzenarioEndscaleChangeValue" />
                       </widget>
                       <packing>
                         <property name="TopAttach">2</property>
@@ -841,6 +820,50 @@ Expresszertifikat</property>
                         <property name="RowSpacing">6</property>
                         <property name="ColumnSpacing">6</property>
                         <child>
+                          <widget class="Gtk.Label" id="Interest">
+                            <property name="MemberName" />
+                            <property name="LabelProp" translatable="yes">&lt;span color="green" size="x-large"&gt;2,00 %&lt;/span&gt;</property>
+                            <property name="UseMarkup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="TopAttach">1</property>
+                            <property name="BottomAttach">2</property>
+                            <property name="LeftAttach">1</property>
+                            <property name="RightAttach">2</property>
+                            <property name="AutoSize">True</property>
+                            <property name="XOptions">Fill</property>
+                            <property name="YOptions">Fill</property>
+                            <property name="XExpand">False</property>
+                            <property name="XFill">True</property>
+                            <property name="XShrink">False</property>
+                            <property name="YExpand">False</property>
+                            <property name="YFill">True</property>
+                            <property name="YShrink">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.Label" id="InterestPA">
+                            <property name="MemberName" />
+                            <property name="LabelProp" translatable="yes">&lt;span color="green" size="x-large"&gt;1,58 %&lt;/span&gt;</property>
+                            <property name="UseMarkup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="TopAttach">2</property>
+                            <property name="BottomAttach">3</property>
+                            <property name="LeftAttach">1</property>
+                            <property name="RightAttach">2</property>
+                            <property name="AutoSize">True</property>
+                            <property name="XOptions">Fill</property>
+                            <property name="YOptions">Fill</property>
+                            <property name="XExpand">False</property>
+                            <property name="XFill">True</property>
+                            <property name="XShrink">False</property>
+                            <property name="YExpand">False</property>
+                            <property name="YFill">True</property>
+                            <property name="YShrink">False</property>
+                          </packing>
+                        </child>
+                        <child>
                           <widget class="Gtk.Label" id="label14">
                             <property name="MemberName" />
                             <property name="LabelProp" translatable="yes">Rückzahlung</property>
@@ -897,56 +920,12 @@ Expresszertifikat</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Label" id="label17">
+                          <widget class="Gtk.Label" id="PayBack">
                             <property name="MemberName" />
                             <property name="LabelProp" translatable="yes">&lt;span color="red" size="x-large"&gt;10,00&lt;/span&gt;</property>
                             <property name="UseMarkup">True</property>
                           </widget>
                           <packing>
-                            <property name="LeftAttach">1</property>
-                            <property name="RightAttach">2</property>
-                            <property name="AutoSize">True</property>
-                            <property name="XOptions">Fill</property>
-                            <property name="YOptions">Fill</property>
-                            <property name="XExpand">False</property>
-                            <property name="XFill">True</property>
-                            <property name="XShrink">False</property>
-                            <property name="YExpand">False</property>
-                            <property name="YFill">True</property>
-                            <property name="YShrink">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="Gtk.Label" id="label18">
-                            <property name="MemberName" />
-                            <property name="LabelProp" translatable="yes">&lt;span color="green" size="x-large"&gt;2,00 %&lt;/span&gt;</property>
-                            <property name="UseMarkup">True</property>
-                          </widget>
-                          <packing>
-                            <property name="TopAttach">1</property>
-                            <property name="BottomAttach">2</property>
-                            <property name="LeftAttach">1</property>
-                            <property name="RightAttach">2</property>
-                            <property name="AutoSize">True</property>
-                            <property name="XOptions">Fill</property>
-                            <property name="YOptions">Fill</property>
-                            <property name="XExpand">False</property>
-                            <property name="XFill">True</property>
-                            <property name="XShrink">False</property>
-                            <property name="YExpand">False</property>
-                            <property name="YFill">True</property>
-                            <property name="YShrink">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="Gtk.Label" id="label19">
-                            <property name="MemberName" />
-                            <property name="LabelProp" translatable="yes">&lt;span color="green" size="x-large"&gt;1,58 %&lt;/span&gt;</property>
-                            <property name="UseMarkup">True</property>
-                          </widget>
-                          <packing>
-                            <property name="TopAttach">2</property>
-                            <property name="BottomAttach">3</property>
                             <property name="LeftAttach">1</property>
                             <property name="RightAttach">2</property>
                             <property name="AutoSize">True</property>

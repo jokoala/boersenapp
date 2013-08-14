@@ -72,6 +72,10 @@
     <Compile Include="ValidatedEntry.cs" />
     <Compile Include="InterestCalculator.cs" />
     <Compile Include="Validators.cs" />
+    <Compile Include="Assets\DiscountCertificate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
 </Project>
