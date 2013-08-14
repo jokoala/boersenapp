@@ -149,6 +149,7 @@
                       <widget class="Gtk.Entry" id="std_isin">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
+                        <property name="Text" translatable="yes">DE000GT443X6</property>
                         <property name="IsEditable">True</property>
                         <property name="InvisibleChar">●</property>
                       </widget>
@@ -171,6 +172,7 @@
                     <child>
                       <widget class="Gtk.ComboBox" id="std_typ">
                         <property name="MemberName" />
+                        <property name="Sensitive">False</property>
                         <property name="IsTextCombo">True</property>
                         <property name="Items" translatable="yes">Discountzertifikat
 Expresszertifikat</property>
@@ -197,9 +199,8 @@ Expresszertifikat</property>
                       <widget class="Gtk.ComboBoxEntry" id="std_wertpapier">
                         <property name="MemberName" />
                         <property name="IsTextCombo">True</property>
-                        <property name="Items" translatable="yes">Eins
-Zwei
-Drei</property>
+                        <property name="Items" translatable="yes">Goldman Sachs Wertpapier GmbH DISC.Z 15.09.14 DAX 8000</property>
+                        <property name="Active">0</property>
                         <signal name="Changed" handler="OnComboboxentry1Changed" />
                       </widget>
                       <packing>
@@ -220,6 +221,7 @@ Drei</property>
                       <widget class="BoersenApp.ValidatedEntry" id="std_wkn">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
+                        <property name="Text" translatable="yes">GT443X</property>
                         <property name="IsEditable">True</property>
                         <property name="InvisibleChar">●</property>
                       </widget>
@@ -281,14 +283,39 @@ Drei</property>
                     <child>
                       <widget class="Gtk.Table" id="table2">
                         <property name="MemberName" />
-                        <property name="NRows">2</property>
+                        <property name="NRows">3</property>
                         <property name="NColumns">2</property>
                         <property name="RowSpacing">6</property>
                         <property name="ColumnSpacing">6</property>
                         <child>
-                          <widget class="Gtk.Entry" id="bonus_cap">
+                          <widget class="BoersenApp.ValidatedEntry" id="discount_bezug">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
+                            <property name="Text" translatable="yes">0,01</property>
+                            <property name="IsEditable">True</property>
+                            <property name="InvisibleChar">●</property>
+                          </widget>
+                          <packing>
+                            <property name="TopAttach">2</property>
+                            <property name="BottomAttach">3</property>
+                            <property name="LeftAttach">1</property>
+                            <property name="RightAttach">2</property>
+                            <property name="AutoSize">True</property>
+                            <property name="XOptions">Fill</property>
+                            <property name="YOptions">Fill</property>
+                            <property name="XExpand">False</property>
+                            <property name="XFill">True</property>
+                            <property name="XShrink">False</property>
+                            <property name="YExpand">False</property>
+                            <property name="YFill">True</property>
+                            <property name="YShrink">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="BoersenApp.ValidatedEntry" id="discount_cap">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Text" translatable="yes">8.000,00</property>
                             <property name="IsEditable">True</property>
                             <property name="InvisibleChar">●</property>
                           </widget>
@@ -309,18 +336,36 @@ Drei</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Entry" id="bonus_lfz">
+                          <widget class="BoersenApp.ValidatedEntry" id="discount_lfz">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
+                            <property name="Text" translatable="yes">10.09.2014</property>
                             <property name="IsEditable">True</property>
                             <property name="InvisibleChar">●</property>
-                            <signal name="FocusOutEvent" handler="OnBonusLfzFocusOutEvent" />
-                            <signal name="FocusInEvent" handler="OnBonusLfzFocusInEvent" />
                           </widget>
                           <packing>
                             <property name="LeftAttach">1</property>
                             <property name="RightAttach">2</property>
-                            <property name="AutoSize">False</property>
+                            <property name="AutoSize">True</property>
+                            <property name="XOptions">Fill</property>
+                            <property name="YOptions">Fill</property>
+                            <property name="XExpand">False</property>
+                            <property name="XFill">True</property>
+                            <property name="XShrink">False</property>
+                            <property name="YExpand">False</property>
+                            <property name="YFill">True</property>
+                            <property name="YShrink">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.Label" id="label21">
+                            <property name="MemberName" />
+                            <property name="LabelProp" translatable="yes">Bezugsverhaeltnis</property>
+                          </widget>
+                          <packing>
+                            <property name="TopAttach">2</property>
+                            <property name="BottomAttach">3</property>
+                            <property name="AutoSize">True</property>
                             <property name="XOptions">Fill</property>
                             <property name="YOptions">Fill</property>
                             <property name="XExpand">False</property>
@@ -334,7 +379,7 @@ Drei</property>
                         <child>
                           <widget class="Gtk.Label" id="label3">
                             <property name="MemberName" />
-                            <property name="LabelProp" translatable="yes">Laufzeit</property>
+                            <property name="LabelProp" translatable="yes">Faelligkeit</property>
                           </widget>
                           <packing>
                             <property name="AutoSize">True</property>
@@ -590,7 +635,7 @@ Drei</property>
                 <child>
                   <widget class="Gtk.Table" id="table4">
                     <property name="MemberName" />
-                    <property name="NRows">2</property>
+                    <property name="NRows">3</property>
                     <property name="NColumns">3</property>
                     <property name="RowSpacing">6</property>
                     <property name="ColumnSpacing">6</property>
@@ -598,75 +643,7 @@ Drei</property>
                       <placeholder />
                     </child>
                     <child>
-                      <widget class="Gtk.Entry" id="entry8">
-                        <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="IsEditable">True</property>
-                        <property name="InvisibleChar">●</property>
-                      </widget>
-                      <packing>
-                        <property name="LeftAttach">1</property>
-                        <property name="RightAttach">2</property>
-                        <property name="AutoSize">True</property>
-                        <property name="XOptions">Fill</property>
-                        <property name="YOptions">Fill</property>
-                        <property name="XExpand">False</property>
-                        <property name="XFill">True</property>
-                        <property name="XShrink">False</property>
-                        <property name="YExpand">False</property>
-                        <property name="YFill">True</property>
-                        <property name="YShrink">False</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="Gtk.Entry" id="entry9">
-                        <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="IsEditable">True</property>
-                        <property name="InvisibleChar">●</property>
-                      </widget>
-                      <packing>
-                        <property name="TopAttach">1</property>
-                        <property name="BottomAttach">2</property>
-                        <property name="LeftAttach">1</property>
-                        <property name="RightAttach">2</property>
-                        <property name="AutoSize">False</property>
-                        <property name="XOptions">Fill</property>
-                        <property name="YOptions">Fill</property>
-                        <property name="XExpand">False</property>
-                        <property name="XFill">True</property>
-                        <property name="XShrink">False</property>
-                        <property name="YExpand">False</property>
-                        <property name="YFill">True</property>
-                        <property name="YShrink">False</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="Gtk.HScale" id="hscale3">
-                        <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="Upper">100</property>
-                        <property name="PageIncrement">10</property>
-                        <property name="StepIncrement">1</property>
-                        <property name="Value">59.1304347826087</property>
-                        <property name="DrawValue">False</property>
-                        <property name="Digits">0</property>
-                        <property name="ValuePos">Top</property>
-                      </widget>
-                      <packing>
-                        <property name="TopAttach">1</property>
-                        <property name="BottomAttach">2</property>
-                        <property name="LeftAttach">2</property>
-                        <property name="RightAttach">3</property>
-                        <property name="AutoSize">True</property>
-                        <property name="YOptions">Fill</property>
-                        <property name="XExpand">True</property>
-                        <property name="XFill">True</property>
-                        <property name="XShrink">False</property>
-                        <property name="YExpand">False</property>
-                        <property name="YFill">True</property>
-                        <property name="YShrink">False</property>
-                      </packing>
+                      <placeholder />
                     </child>
                     <child>
                       <widget class="Gtk.Label" id="label12">
@@ -688,11 +665,127 @@ Drei</property>
                     <child>
                       <widget class="Gtk.Label" id="label13">
                         <property name="MemberName" />
-                        <property name="LabelProp" translatable="yes">Endkurs</property>
+                        <property name="LabelProp" translatable="yes">Kurs Basiswert</property>
                       </widget>
                       <packing>
                         <property name="TopAttach">1</property>
                         <property name="BottomAttach">2</property>
+                        <property name="AutoSize">True</property>
+                        <property name="XOptions">Fill</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">False</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Label" id="label20">
+                        <property name="MemberName" />
+                        <property name="LabelProp" translatable="yes">Endkurs Basiswert</property>
+                      </widget>
+                      <packing>
+                        <property name="TopAttach">2</property>
+                        <property name="BottomAttach">3</property>
+                        <property name="AutoSize">True</property>
+                        <property name="XOptions">Fill</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">False</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="BoersenApp.ValidatedEntry" id="szenario_base">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Text" translatable="yes">8.426,82</property>
+                        <property name="IsEditable">True</property>
+                        <property name="InvisibleChar">●</property>
+                      </widget>
+                      <packing>
+                        <property name="TopAttach">1</property>
+                        <property name="BottomAttach">2</property>
+                        <property name="LeftAttach">1</property>
+                        <property name="RightAttach">2</property>
+                        <property name="AutoSize">True</property>
+                        <property name="XOptions">Fill</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">False</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="BoersenApp.ValidatedEntry" id="szenario_end">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Text" translatable="yes">8.426,82</property>
+                        <property name="IsEditable">True</property>
+                        <property name="InvisibleChar">●</property>
+                      </widget>
+                      <packing>
+                        <property name="TopAttach">2</property>
+                        <property name="BottomAttach">3</property>
+                        <property name="LeftAttach">1</property>
+                        <property name="RightAttach">2</property>
+                        <property name="AutoSize">True</property>
+                        <property name="XOptions">Fill</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">False</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.HScale" id="szenario_endscale">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Upper">200</property>
+                        <property name="PageIncrement">10</property>
+                        <property name="StepIncrement">1</property>
+                        <property name="Value">100</property>
+                        <property name="DrawValue">False</property>
+                        <property name="Digits">0</property>
+                        <property name="ValuePos">Top</property>
+                      </widget>
+                      <packing>
+                        <property name="TopAttach">2</property>
+                        <property name="BottomAttach">3</property>
+                        <property name="LeftAttach">2</property>
+                        <property name="RightAttach">3</property>
+                        <property name="AutoSize">True</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">True</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="BoersenApp.ValidatedEntry" id="szenario_kauf">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Text" translatable="yes">75,080</property>
+                        <property name="IsEditable">True</property>
+                        <property name="InvisibleChar">●</property>
+                      </widget>
+                      <packing>
+                        <property name="LeftAttach">1</property>
+                        <property name="RightAttach">2</property>
                         <property name="AutoSize">True</property>
                         <property name="XOptions">Fill</property>
                         <property name="YOptions">Fill</property>

@@ -6,27 +6,52 @@ namespace BoersenApp
 	[System.ComponentModel.ToolboxItem(true)]
 	public class ValidatedEntry : Gtk.Entry
 	{
-		public delegate bool Validator(String input);
+		Gdk.Color invalidColor;
+		object parsedText;
 
-		public Validator validate { get; set; }
-		public Gdk.Color invalid_color { get; set; }
+		public delegate bool Validator(String input, ref object res);
+		public delegate String Normalizer(object data);
+
+		public virtual Validator Validate { get; set; }
+		public virtual Normalizer Normalize { get; set; }
+
+		public virtual Gdk.Color InvalidColor {
+			get {
+				return invalidColor;
+			}
+			set {
+				invalidColor = value;
+			}
+		}
+
+		public object ParsedText {
+			get {
+				if (Validate == null) return null;
+				if (Validate(this.Text, ref parsedText)) {
+					return parsedText;
+				} else {
+					return null;
+				}
+			}
+		}
 
 		public ValidatedEntry ()
 		{
-			Gdk.Color tmp_invalid_color;
-			Gdk.Color.Parse ("yellow", ref tmp_invalid_color);
-			invalid_color = tmp_invalid_color;
-
+			Gdk.Color.Parse ("yellow", ref invalidColor);
 			this.FocusOutEvent += new FocusOutEventHandler(ValidateOnFocusOutEvent);
 			this.FocusInEvent += new FocusInEventHandler(ValidateOnFocusInEvent);
 		}
 
 		protected void ValidateOnFocusOutEvent (object o, FocusOutEventArgs args)
 		{
-			if (validate == null) return;
-			if (!validate (this.Text)) 
-			{
-				this.ModifyBase (StateType.Normal, invalid_color);
+			if (Validate == null)
+				return;
+			if (!Validate (this.Text, ref parsedText)) {
+				this.ModifyBase (StateType.Normal, invalidColor);
+			} else {
+				if (Normalize != null) {
+					this.Text = Normalize (parsedText);
+				}
 			}
 		}	
 
@@ -34,7 +59,6 @@ namespace BoersenApp
 		{
 			this.ModifyBase (StateType.Normal);
 		}
-
 	}
 }
 
