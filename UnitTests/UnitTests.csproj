@@ -34,11 +34,15 @@
       <Private>False</Private>
       <Package>nunit</Package>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\HAP\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="InterestCalculatorTest.cs" />
     <Compile Include="WebScraperTest.cs" />
+    <Compile Include="BoerseStuttgartTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

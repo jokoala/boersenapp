@@ -11,7 +11,7 @@ namespace ScraperLib
 		public string Url { get; set; }
 		public HtmlDocument Document { get; set; }
 
-		public void ReadData ()
+		public virtual void ReadData ()
 		{
 			HttpWebRequest req = (HttpWebRequest)WebRequest.Create (Url);
 			req.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
@@ -22,7 +22,7 @@ namespace ScraperLib
 			RawData = dataReader.ReadToEnd ();
 		}
 
-		public void ParseData()
+		public virtual void ParseData()
 		{
 			Document = new HtmlDocument();
 			Document.LoadHtml (RawData);
