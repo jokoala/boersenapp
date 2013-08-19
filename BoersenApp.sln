@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTest", "WebTest\WebTest.csproj", "{FCF496AF-81B8-4F1E-8220-142C430968EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScraperLib", "ScraperLib\ScraperLib.csproj", "{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -14,6 +16,12 @@ Global
 		Default|Any CPU = Default|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}.Debug|x86.Build.0 = Debug|Any CPU
+		{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}.Release|x86.ActiveCfg = Release|Any CPU
+		{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}.Release|x86.Build.0 = Release|Any CPU
 		{DED1650F-81E7-4AE5-8CAF-0E3F809DEA8B}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{DED1650F-81E7-4AE5-8CAF-0E3F809DEA8B}.Debug|x86.Build.0 = Debug|Any CPU
 		{DED1650F-81E7-4AE5-8CAF-0E3F809DEA8B}.Default|Any CPU.ActiveCfg = Debug|Any CPU
@@ -32,6 +40,6 @@ Global
 		{FCF496AF-81B8-4F1E-8220-142C430968EC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = WebTest\WebTest.csproj
+		StartupItem = BoersenApp\BoersenApp.csproj
 	EndGlobalSection
 EndGlobal
