@@ -66,6 +66,26 @@ namespace UnitTests
 			boerseStuttgart.FetchDataFromId("70602330");
 			Assert.AreEqual(67.45m, boerseStuttgart.CurrentRate);
 		}
+
+		[Test]
+		public void FetchDataFromId_calledOnExampleAssets_setsBaseRate()
+		{
+			boerseStuttgart.FetchDataFromId("75480544");
+			Assert.AreEqual(8368.99m, boerseStuttgart.BaseRate);
+
+			boerseStuttgart.FetchDataFromId("70602330");
+			Assert.AreEqual(8364.66m, boerseStuttgart.BaseRate);
+		}
+
+		[Test]
+		public void FetchDataFromId_calledOnExampleAsset_setsName ()
+		{
+			boerseStuttgart.FetchDataFromId ("75480544");
+			Assert.AreEqual ("Discount-Zertifikat auf DAX (Cap 8000)", boerseStuttgart.Name);
+
+			boerseStuttgart.FetchDataFromId ("70602330");
+			Assert.AreEqual ("Discount-Zertifikat auf DAX (Cap 7100)", boerseStuttgart.Name);
+		}
 	}
 }
 

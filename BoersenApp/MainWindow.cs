@@ -2,12 +2,14 @@ using System;
 using Gtk;
 using BoersenApp;
 using Assets = BoersenApp.Assets;
+using ScraperLib;
 
 // TODO: Pop-up for date dialog
 // TODO: input validation
 public partial class MainWindow: Gtk.Window {	
 	uint m_context_id;
 	Assets.DiscountCertificate asset;
+	BoerseStuttgart boerseStuttgart;
 
 	/// <summary>
 	/// Gets the asset.
@@ -45,6 +47,8 @@ public partial class MainWindow: Gtk.Window {
 	{
 		Build ();
 		asset = new Assets.DiscountCertificate();
+		boerseStuttgart = new BoerseStuttgart();
+	
 		m_context_id= statusbar1.GetContextId("MainWindow");
 
 		discount_lfz.Validate = Validators.ValidateDate;
@@ -96,9 +100,9 @@ public partial class MainWindow: Gtk.Window {
 			} else {
 				color = "red";
 			}
-			PayBack.LabelProp = String.Format ("<span color=\"{1}\" size=\"x-large\">{0}</span>", payback, color);
-			Interest.LabelProp = String.Format ("<span color=\"{1}\" size=\"x-large\">{0} %</span>", interest, color);
-			InterestPA.LabelProp = String.Format ("<span color=\"{1}\" size=\"x-large\">{0:0.0000} %</span>", interestPA, color);
+			PayBack.LabelProp = String.Format ("<span color=\"{1}\" size=\"x-large\">{0:0.00}</span>", payback, color);
+			Interest.LabelProp = String.Format ("<span color=\"{1}\" size=\"x-large\">{0:0.00} %</span>", interest, color);
+			InterestPA.LabelProp = String.Format ("<span color=\"{1}\" size=\"x-large\">{0:0.00} %</span>", interestPA, color);
 		} catch (NullReferenceException) {
 		}
 	}	
@@ -113,7 +117,32 @@ public partial class MainWindow: Gtk.Window {
 		decimal baseVal = (decimal)szenario_base.ParsedText;
 		decimal endVal = decimal.Round (baseVal * (decimal)szenario_endscale.Value/100, 4);
 		szenario_end.Text = endVal.ToString ();
+	}	
+
+	protected void LoadFromStuttgart ()
+	{
+		std_wertpapier.PrependText(boerseStuttgart.Name);
+		std_wertpapier.Active=0;
+		std_wkn.Text = boerseStuttgart.Wkn;
+		std_isin.Text = boerseStuttgart.Isin;
+
+		discount_lfz.ParsedText = boerseStuttgart.Expiration;
+		discount_cap.ParsedText = boerseStuttgart.Cap;
+		discount_bezug.ParsedText = boerseStuttgart.Ratio;
+
+		szenario_kauf.ParsedText = boerseStuttgart.CurrentRate;
+		szenario_base.ParsedText = boerseStuttgart.BaseRate;
+
+		OnSzenarioEndscaleChangeValue(null, null);
 	}
+
+	protected void OnLoadButtonClicked (object sender, EventArgs e)
+	{
+		Console.WriteLine(std_wertpapier.ActiveText);
+		boerseStuttgart.FetchDataFromSearch(std_wertpapier.ActiveText);
+		LoadFromStuttgart();
+	}
+
 
 
 

@@ -78,4 +78,10 @@
   <ItemGroup>
     <Folder Include="Assets\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScraperLib\ScraperLib.csproj">
+      <Project>{09036BFE-C1EC-4B55-80D6-E5962E5CEEFA}</Project>
+      <Name>ScraperLib</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

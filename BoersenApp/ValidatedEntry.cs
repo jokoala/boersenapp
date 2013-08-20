@@ -26,11 +26,21 @@ namespace BoersenApp
 
 		public object ParsedText {
 			get {
-				if (Validate == null) return null;
-				if (Validate(this.Text, ref parsedText)) {
+				if (Validate == null)
+					return null;
+				if (Validate (this.Text, ref parsedText)) {
 					return parsedText;
 				} else {
 					return null;
+				}
+			}
+
+			set {
+				parsedText = value;
+				if (Normalize == null) {
+					Text = parsedText.ToString();
+				} else {
+					Text = Normalize(parsedText);
 				}
 			}
 		}

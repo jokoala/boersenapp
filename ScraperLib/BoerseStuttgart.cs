@@ -16,6 +16,8 @@ namespace ScraperLib
 		public decimal Cap { get; set; }
 		public decimal Ratio {get; set; }
 		public DateTime Expiration { get; set; }
+		public decimal BaseRate { get; set; }
+		public string Name { get; set; }
 
 		public BoerseStuttgart()
 		{
@@ -33,6 +35,17 @@ namespace ScraperLib
 			ParseData();
 		}
 
+		public void FetchDataFromSearch (string search)
+		{
+			if (DummyMode) {
+				Url = string.Format ("http://localhost/~johannes/boersenapp/{0}.html", search);
+			} else {
+				Url = string.Format ("https://www.boerse-stuttgart.de/rd/de/search/?searchterm={0}&submitheadsearch=Suchen", search);
+			}
+			ReadData ();
+			ParseData ();
+		}
+
 		public override void ParseData ()
 		{
 			base.ParseData ();
@@ -46,10 +59,10 @@ namespace ScraperLib
 			// Read information from tables
 			Wkn = GetTableEntry("WKN");
 			Isin = GetTableEntry ("ISIN");
+			Name = GetTableEntry("Produktname");
 
 			// Read Cap
 			match = Regex.Match (GetTableEntry ("Cap").Trim (), "^([0-9.,]*) .*$");
-			Console.WriteLine (match.Groups[1].Value);
 			Cap = decimal.Parse (match.Groups[1].Value);
 
 			// Read Ratio
@@ -62,6 +75,10 @@ namespace ScraperLib
 			// Read Rate
 			match = Regex.Match (GetTableEntry ("Last").Trim (), "^(\\d*,\\d*)");
 			CurrentRate = decimal.Parse (match.Groups[1].Value);
+
+			// Read Base Value
+			match = Regex.Match (GetTableEntry("Basiswert").Trim(), "\\(([0-9.,]*)\\)$");
+			BaseRate = decimal.Parse (match.Groups[1].Value);
 		}
 
 		protected string GetTableEntry (string key)
