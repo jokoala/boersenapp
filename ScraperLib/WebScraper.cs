@@ -1,7 +1,10 @@
 using System;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using HtmlAgilityPack;
+
 
 namespace ScraperLib
 {
@@ -10,6 +13,18 @@ namespace ScraperLib
 		public string RawData { get; set; }
 		public string Url { get; set; }
 		public HtmlDocument Document { get; set; }
+
+		public WebScraper()
+		{
+			ServicePointManager.ServerCertificateValidationCallback += delegate(
+				object sender, 
+				X509Certificate certificate, 
+				X509Chain chain, 
+				SslPolicyErrors sslPolicyErrors)
+			{
+				return true;
+			};
+		}
 
 		public virtual void ReadData ()
 		{

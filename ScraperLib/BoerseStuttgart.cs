@@ -12,6 +12,10 @@ namespace ScraperLib
 		public string Id { get; set; }
 		public string Wkn { get; set; }
 		public string Isin { get; set; }
+		public decimal CurrentRate { get; set; }
+		public decimal Cap { get; set; }
+		public decimal Ratio {get; set; }
+		public DateTime Expiration { get; set; }
 
 		public BoerseStuttgart()
 		{
@@ -23,7 +27,7 @@ namespace ScraperLib
 			if (DummyMode) {
 				Url = string.Format ("http://localhost/~johannes/boersenapp/{0}.html", id);
 			} else {
-				Url = string.Format ("https://www.boerse-stuttgart.de/rd/de/anlagezertifikate/factsheet?ID_NOTATION={0}.html", id);
+				Url = string.Format ("https://www.boerse-stuttgart.de/de/factsheet/anlagezertifikate/uebersicht.html?&ID_NOTATION={0}",id);
 			}
 			ReadData();
 			ParseData();
@@ -42,11 +46,30 @@ namespace ScraperLib
 			// Read information from tables
 			Wkn = GetTableEntry("WKN");
 			Isin = GetTableEntry ("ISIN");
+
+			// Read Cap
+			match = Regex.Match (GetTableEntry ("Cap").Trim (), "^([0-9.,]*) .*$");
+			Console.WriteLine (match.Groups[1].Value);
+			Cap = decimal.Parse (match.Groups[1].Value);
+
+			// Read Ratio
+			match = Regex.Match (GetTableEntry ("Bezugsver").Trim (), "^(\\d*)\\s*:\\s*(\\d*)$");
+			Ratio = decimal.Parse (match.Groups[2].Value) / decimal.Parse (match.Groups[1].Value);
+
+			// Read Expiration Date
+			Expiration = DateTime.Parse (GetTableEntry ("Letzter Bewert"));
+
+			// Read Rate
+			match = Regex.Match (GetTableEntry ("Last").Trim (), "^(\\d*,\\d*)");
+			CurrentRate = decimal.Parse (match.Groups[1].Value);
 		}
 
 		protected string GetTableEntry (string key)
 		{
 			HtmlNode valueNode = Document.DocumentNode.SelectSingleNode (string.Format ("//td[. = \"{0}\"]/following-sibling::td[1]", key));
+			if (valueNode == null) {
+				valueNode = Document.DocumentNode.SelectSingleNode (string.Format ("//td[contains(.//span, \"{0}\")]/following-sibling::td[1]", key));
+			}
 			return valueNode.InnerText;
 		}
 	}

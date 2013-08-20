@@ -46,6 +46,26 @@ namespace UnitTests
 			boerseStuttgart.FetchDataFromId ("70602330");
 			Assert.AreEqual ("DE000GT3N7B6", boerseStuttgart.Isin);
 		}
+
+		[Test]
+		public void FetchDataFromId_calledOnExampleAssets_returnsDiscountData ()
+		{
+			boerseStuttgart.FetchDataFromId("75480544");
+
+			Assert.AreEqual(8000.00m, boerseStuttgart.Cap);
+			Assert.AreEqual (0.01m, boerseStuttgart.Ratio);
+			Assert.AreEqual (DateTime.Parse ("10.09.2014"), boerseStuttgart.Expiration);
+		}
+
+		[Test]
+		public void FetchDataFromId_calledOnExampleAssets_returnsRate ()
+		{
+			boerseStuttgart.FetchDataFromId ("75480544");
+			Assert.AreEqual (74.93m, boerseStuttgart.CurrentRate);
+
+			boerseStuttgart.FetchDataFromId("70602330");
+			Assert.AreEqual(67.45m, boerseStuttgart.CurrentRate);
+		}
 	}
 }
 
